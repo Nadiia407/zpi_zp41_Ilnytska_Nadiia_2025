@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 5</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Лабораторна робота 5</h1>
+        <p>WEB-СХОВИЩЕ. WEB STORAGE API. МОДУЛЬНОСТЬ КОДУ. МОДАЛЬНЕ ВІКНО</p>
+    </header>
+
+    <nav>
+        <button onclick="showTask('task1')">Завдання 1</button>
+        <button onclick="showTask('task2')">Завдання 2</button>
+    </nav>
+
+    <main>
+        <!-- Завдання 1 -->
+        <section id="task1" class="task-section active">
+            <h2>Завдання 1: Галерея зображень</h2>
+            <p>
+                Створити галерею зображень згідно макету, доступного за посиланням:
+                <a href="https://www.figma.com/design/m8k9NQV7qZrtYDCvxfD68B/HW-JavaScript?node-id=3-941&p=f" target="_blank">Макет галереї</a>
+            </p>
+            <p>
+                В HTML створити контейнер галереї <code>&lt;ul class="gallery"&gt;&lt;/ul&gt;</code>. В JavaScript додати масив об'єктів з даними для галереї, генерувати розмітку елементів динамічно та додати її до DOM. Створити стилізацію галереї та додати функціонал модального вікна для відображення збільшеної версії зображення при кліку.
+            </p>
+            <h3>Розмітка</h3>
+            <pre>
+<ul class="gallery"></ul>
+            </pre>
+            <h3>JS Код</h3>
+            <pre>
+const images = [
+    {
+        preview: 'https://via.placeholder.com/150',
+        original: 'https://via.placeholder.com/600',
+        description: 'Опис зображення 1',
+    },
+    {
+        preview: 'https://via.placeholder.com/150',
+        original: 'https://via.placeholder.com/600',
+        description: 'Опис зображення 2',
+    }
+];
+
+const galleryContainer = document.querySelector('.gallery');
+const galleryMarkup = images.map(({ preview, original, description }) => `
+    <li class="gallery-item">
+        <a href="${original}" class="gallery-link">
+            <img src="${preview}" alt="${description}" class="gallery-image" />
+        </a>
+    </li>
+`).join('');
+
+galleryContainer.innerHTML = galleryMarkup;
+
+galleryContainer.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    if (event.target.nodeName !== 'IMG') return;
+
+    const originalImage = event.target.closest('a').href;
+    basicLightbox.create(`<img src="${originalImage}" alt="">`).show();
+});
+            </pre>
+        </section>
+
+        <!-- Завдання 2 -->
+        <section id="task2" class="task-section">
+            <h2>Завдання 2: Форма зворотного зв'язку</h2>
+            <p>
+                Додати у HTML розмітку форми з двома елементами: <code>Email</code> та <code>Message</code>, а також кнопкою типу <code>submit</code>. Дані форми потрібно зберігати в локальне сховище.
+            </p>
+            <p>Посилання на макет: 
+                <a href="https://www.figma.com/design/m8k9NQV7qZrtYDCvxfD68B/HW-JavaScript?node-id=3-969&t=ms4nQGevNBJzbAlx-0" target="_blank">Макет форми</a>
+            </p>
+            <h3>Розмітка</h3>
+            <form class="feedback-form" autocomplete="off">
+                <label>
+                    Email
+                    <input type="email" name="email" autofocus>
+                </label>
+                <label>
+                    Message
+                    <textarea name="message" rows="8"></textarea>
+                </label>
+                <button type="submit">Submit</button>
+            </form>
+            <h3>JS Код</h3>
+            <pre>
+const form = document.querySelector('.feedback-form');
+const STORAGE_KEY = 'feedback-form-state';
+
+let formData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+    email: '',
+    message: ''
+};
+
+window.addEventListener('DOMContentLoaded', () => {
+    if (formData.email) form.elements.email.value = formData.email;
+    if (formData.message) form.elements.message.value = formData.message;
+});
+
+form.addEventListener('input', (event) => {
+    formData[event.target.name] = event.target.value.trim();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+});
+
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    if (!formData.email || !formData.message) {
+        alert('Fill please all fields');
+        return;
+    }
+
+    console.log(formData);
+
+    localStorage.removeItem(STORAGE_KEY);
+    formData = { email: '', message: '' };
+    form.reset();
+});
+            </pre>
+        </section>
+    </main>
+
+    <script>
+        function showTask(taskId) {
+            const tasks = document.querySelectorAll('.task-section');
+            tasks.forEach(task => task.classList.remove('active'));
+            document.getElementById(taskId).classList.add('active');
+        }
+    </script>
+</body>
+</html>

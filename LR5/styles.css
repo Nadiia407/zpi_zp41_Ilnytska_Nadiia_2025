@@ -1,0 +1,131 @@
+/* Загальний стиль для сторінки */
+body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    background-color: #18047f;
+}
+
+/* Стиль для шапки */
+header {
+    padding: 5px;
+    display: flex;
+    background-color: #d2ddff;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-text {
+    max-width: 80%;
+}
+
+.student-photo {
+    width: 30px; /* Нова ширина */
+    height: 30px; /* Нова висота */
+}
+
+/* Стиль для навігації */
+nav {
+    background-color: #0720c0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+nav button {
+    background-color: white;
+    color: #11025d;
+    border: none;
+    padding: 10px 15px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 35px;
+    transition: background-color 0.10s, transform 0.10s;
+}
+
+nav button:hover {
+    background-color: #c0dd06;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+nav button.active-button {
+    background-color: #c0dd06;
+    /* Світлий сірий для активної кнопки */
+    color: #1A202C;
+    /* Темно-синій текст */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Основний контейнер */
+main {
+    display: flex;
+    padding: 20px;
+}
+
+/* Стиль для зображень */
+.screen-img {
+    max-width: 10%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+/* Стиль для контенту */
+.text-content {
+    background-color: white;
+    padding: 60px;
+    border-radius: 5px;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.content-section {
+    display: none;
+    width: 100%;
+}
+
+.content-section.active {
+    display: flex;
+    width: 1850px; /*Нерухомий фон під текст, наповнення лабораторних робіт*/
+}
+
+/* Стиль для sidebar */
+.sidebar {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 35px;
+}
+
+.sidebar button {
+    background-color: #3f4aed;
+    color: white;
+    border: none;
+    padding: 25px;
+    margin-bottom: 25px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.sidebar button:hover {
+    background-color: #c0dd06;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar button.active-button {
+    background-color: #c0dd06;
+    color: #1A202C;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Стиль для текстових блоків у секції структури */
+#structure p {
+    white-space: pre-line;
+}
