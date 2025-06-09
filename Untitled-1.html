@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Звіти з лабораторних робіт</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+    <body>
+        <h4>ЗАВДАННЯ</h4>
+        <p>
+            У звітному HTML-документі створити <code>html</code>-розмітку, яка складається з форми логіна.
+            Обробка відправлення форми <code>form.login-form</code> повинна відбуватися за подією <code>submit</code>.
+            Під час відправлення форми сторінка не повинна перезавантажуватися.
+            Якщо при сабміті у формі є незаповнені поля, виводь <code>alert</code> з попередженням про те, що
+            "All form fields must be filled in".
+            Якщо всі поля заповнені, збери значення полів в об'єкт, виведи в консоль і очисти форму.
+        </p>
+        <h4>PROGRAM</h4>
+        <section class="form__section">
+            <h3 class="form__title">ЛОГІН</h3>
+            <form class="login-form">
+                <label>
+                    Email
+                    <input type="email" name="email" placeholder="Enter your email">
+                </label>
+                <label>
+                    Password
+                    <input type="password" name="password" placeholder="Enter your password">
+                </label>
+                <button type="submit">Log in</button>
+            </form>
+        </section>
+        <h4>JS CODE</h4>
+        <pre>
+            document.querySelector('.login-form').addEventListener('submit', function(event) {
+                event.preventDefault(); // Забороняємо перезавантаження сторінки
+
+                const form = event.target;
+                const email = form.elements.email.value.trim();
+                const password = form.elements.password.value.trim();
+                const messageBox = document.querySelector('.message');
+
+                if (!email || !password) {
+                    alert('All form fields must be filled in');
+                    return;
+                }
+
+                const formData = {
+                    email: email,
+                    password: password
+                };
+
+                console.log(formData);
+
+                form.reset(); // Очищаємо поля форми
+            });
+        </pre>
+        <h4>HTML</h4>
+        <pre>
+            &lt;section class="form__section">
+                &lt;h3 class="form__title">ЛОГІН&lt;/h3>
+                &lt;form class="login-form">
+                    &lt;label>
+                        Email
+                        &lt;input type="email" name="email" placeholder="Enter your email">&lt;/input>
+                    &lt;/label>
+                    &lt;label>
+                        Password
+                        &lt;input type="password" name="password" placeholder="Enter your password">&lt;/input>
+                    &lt;/label>
+                    &lt;button type="submit">Log in&lt;/button>
+                &lt;/form>
+            &lt;/section>
+        </pre>
+    </body>
+</html>
