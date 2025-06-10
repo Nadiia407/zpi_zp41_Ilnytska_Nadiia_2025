@@ -1,77 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
+<html lang="uk">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Звіти з лабораторних робіт</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css" rel="stylesheet">
+    <style>
+        .Student {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            margin-left: 5px;
+        }
+        .active {
+            display: block;
+        }
+        .content-section:not(.active) {
+            display: none;
+        }
+    </style>
 </head>
-    <body>
-        <h4>ЗАВДАННЯ</h4>
-        <p>
-            У звітному HTML-документі створити <code>html</code>-розмітку, яка складається з форми логіна.
-            Обробка відправлення форми <code>form.login-form</code> повинна відбуватися за подією <code>submit</code>.
-            Під час відправлення форми сторінка не повинна перезавантажуватися.
-            Якщо при сабміті у формі є незаповнені поля, виводь <code>alert</code> з попередженням про те, що
-            "All form fields must be filled in".
-            Якщо всі поля заповнені, збери значення полів в об'єкт, виведи в консоль і очисти форму.
-        </p>
-        <h4>PROGRAM</h4>
-        <section class="form__section">
-            <h3 class="form__title">ЛОГІН</h3>
-            <form class="login-form">
-                <label>
-                    Email
-                    <input type="email" name="email" placeholder="Enter your email">
-                </label>
-                <label>
-                    Password
-                    <input type="password" name="password" placeholder="Enter your password">
-                </label>
-                <button type="submit">Log in</button>
-            </form>
-        </section>
-        <h4>JS CODE</h4>
-        <pre>
-            document.querySelector('.login-form').addEventListener('submit', function(event) {
-                event.preventDefault(); // Забороняємо перезавантаження сторінки
+<body>
+    <header>
+        <div class="header-text">
+            <h1>Звіти з лабораторних робіт</h1>
+            <p>З дисципліни: Основи клієнтських розробок</p>
+            <p>Студентка групи ЗПІ-зп 41</p>
+        </div>
+        <img src="Student-photo.jfif" alt="Фото студента" class="Student">
+    </header>
 
-                const form = event.target;
-                const email = form.elements.email.value.trim();
-                const password = form.elements.password.value.trim();
-                const messageBox = document.querySelector('.message');
+    <!-- Навігація для вибору лабораторних робіт -->
+    <nav>
+        <button onclick="showLab('lab4')">Лабораторна робота 4</button>
+        <button onclick="showLab('lab5')">Лабораторна робота 5</button>
+        <button onclick="showLab('lab6')">Лабораторна робота 6</button>
+    </nav>
 
-                if (!email || !password) {
-                    alert('All form fields must be filled in');
-                    return;
-                }
+    <main>
+        <!-- Лабораторна робота 4 -->
+        <div id="lab4" class="content-section active">
+            <div class="sidebar">
+                <button onclick="showSection('description', 'lab4')">Тема</button>
+                <button onclick="showSection('goal', 'lab4')">Завдання</button>
+            </div>
+            <div id="description" class="lab4-section content-section text-content active">
+                <p><strong>Тема:</strong> КЛАСИ. ОБ'ЄКТНА МОДЕЛЬ ДОКУМЕНТА (DOM). ПОДІЇ. ОБ'ЄКТ ПОДІЇ. ДЕЛЕГУВАННЯ ПОДІЙ. THROTTLE. МОДУЛЬНОСТЬ КОДУ.</p>
+                <p><strong>Мета:</strong> придбати практичні навички роботи з об'єктами. Методи об'єкта. Callback. Стрілочні функції. Реалізація програм засобами мови JavaScript.</p>
+            </div>
+            <div id="goal" class="lab4-section content-section text-content">
+                <h4>Завдання:</h4>
+                <p>Створити форму логіна з валідацією.</p>
+                <form class="login-form">
+                    <label>Email<input type="email" name="email" placeholder="Enter your email"></label>
+                    <label>Password<input type="password" name="password" placeholder="Enter your password"></label>
+                    <button type="submit">Log in</button>
+                </form>
+            </div>
+        </div>
 
-                const formData = {
-                    email: email,
-                    password: password
-                };
+        <!-- Лабораторна робота 5 -->
+        <div id="lab5" class="content-section">
+            <div class="sidebar">
+                <button onclick="showSection('task1', 'lab5')">Завдання 1</button>
+                <button onclick="showSection('task2', 'lab5')">Завдання 2</button>
+            </div>
+            <div id="task1" class="lab5-section content-section text-content active">
+                <h4>Завдання 1: Галерея зображень</h4>
+                <p>
+                    Посилання на макет: 
+                    <a href="https://www.figma.com/design/m8k9NQV7qZrtYDCvxfD68B/HW-JavaScript?node-id=3-941&p=f" target="_blank">Макет галереї</a>
+                </p>
+                <pre>
+const images = [
+    { preview: 'https://via.placeholder.com/150', original: 'https://via.placeholder.com/600', description: 'Опис' }
+];
+const galleryContainer = document.querySelector('.gallery');
+// Ваш JS код для галереї
+                </pre>
+            </div>
+            <div id="task2" class="lab5-section content-section text-content">
+                <h4>Завдання 2: Форма зворотного зв'язку</h4>
+                <p>
+                    Посилання на макет: 
+                    <a href="https://www.figma.com/design/m8k9NQV7qZrtYDCvxfD68B/HW-JavaScript?node-id=3-969&t=ms4nQGevNBJzbAlx-0" target="_blank">Макет форми</a>
+                </p>
+                <form class="feedback-form">
+                    <label>Email<input type="email" name="email" placeholder="Enter your email"></label>
+                    <label>Message<textarea name="message" placeholder="Enter your message"></textarea></label>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </main>
 
-                console.log(formData);
-
-                form.reset(); // Очищаємо поля форми
-            });
-        </pre>
-        <h4>HTML</h4>
-        <pre>
-            &lt;section class="form__section">
-                &lt;h3 class="form__title">ЛОГІН&lt;/h3>
-                &lt;form class="login-form">
-                    &lt;label>
-                        Email
-                        &lt;input type="email" name="email" placeholder="Enter your email">&lt;/input>
-                    &lt;/label>
-                    &lt;label>
-                        Password
-                        &lt;input type="password" name="password" placeholder="Enter your password">&lt;/input>
-                    &lt;/label>
-                    &lt;button type="submit">Log in&lt;/button>
-                &lt;/form>
-            &lt;/section>
-        </pre>
-    </body>
+    <script>
+        function showLab(labId) {
+            const labs = document.querySelectorAll('.content-section');
+            labs.forEach(lab => lab.classList.remove('active'));
+            document.getElementById(labId).classList.add('active');
+        }
+        function showSection(sectionId, labId) {
+            const activeLab = document.getElementById(labId);
+            if (activeLab) {
+                const sections = activeLab.querySelectorAll(`.${labId}-section`);
+                sections.forEach(section => section.style.display = 'none');
+                activeLab.querySelector(`#${sectionId}`).style.display = 'block';
+            }
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            showLab('lab4');
+            showSection('description', 'lab4');
+        });
+    </script>
+</body>
 </html>
